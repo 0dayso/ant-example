@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ PropTypes } from 'react';
 import { Form, Icon, Input, Button, Card } from 'antd';
 import styles from './Login.css';
 
@@ -37,6 +37,12 @@ class LoginForm extends React.Component {
       </Card>
     );
   }
+}
+
+LoginForm.propTypes = {
+  form: PropTypes.object,
+  loginButtonLoading: PropTypes.bool,
+  onOk: PropTypes.func
 }
 
 export default Form.create()(LoginForm);

@@ -1,3 +1,30 @@
+import Mock from 'mockjs';
+
+let meta = {
+      error:"",
+      login:true,
+      message:"登录成功",
+      timeused:"71ms"
+    }
+
+
+let userData = [
+        {
+        'id|+1':1,
+        username:'@name',
+        cname:'@cname',
+        email:'@email',
+        lastlogin:'@ip',
+        expire:'1500',
+        token:/[a-zA-Z1-9]{16}/,
+        lastLogTime: '@datetime',
+        // avator:function(){ return Mock.Random.dataImage('125x125', this.username.substr(0, 1))}
+      }
+];
+let usersData = Mock.mock({
+      'info|10':userData
+    });
+
 export default {
   // 获取菜单
   'GET /api/dashboard/sider': {
@@ -79,5 +106,17 @@ export default {
         'icon': ''
       }
     ]
+  },
+
+  'POST /api/login':{
+    meta:meta,
+    result:Mock.mock({
+      'info|1':userData
+    })
+  },
+
+  'GET /api/users':{
+    meta:meta,
+    result:usersData
   }
 }

@@ -1,7 +1,13 @@
 import fetch from 'dva/fetch';
-
+import { message } from 'antd';
 function parseJSON(response) {
-  return response.json();
+  let res = response.json();
+  if(res.meta.error){
+    throw res.meta.error;
+    message.error(res.meta.error);
+  }else{
+    return res.result;
+  }
 }
 
 function checkStatus(response) {
