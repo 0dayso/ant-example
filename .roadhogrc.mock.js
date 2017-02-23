@@ -1,29 +1,37 @@
-import Mock from 'mockjs';
+import Mock from 'mockjs'
 
-let meta = {
-      error:"",
-      login:true,
-      message:"登录成功",
-      timeused:"71ms"
-    }
-
+/**
+ * 组装API返回内容方法
+ * @param {any} data - 存在errorno时候为错误内容
+ * @param {number} erroono - 错误码，不存在错误码时候data为返回消息内容
+ * @return {Object} - object
+ */
+function response (data, errorno = 0) {
+  let result = {
+    'errno': 0,
+    'errmsg': ''
+  }
+  if (errorno > 0) {
+    result.errno = errorno
+    result.errmsg = data
+  }else {
+    result.data = data
+  }
+  return result
+}
 
 let userData = [
-        {
-        'id|+1':1,
-        username:'@name',
-        cname:'@cname',
-        email:'@email',
-        lastlogin:'@ip',
-        expire:'1500',
-        token:/[a-zA-Z1-9]{16}/,
-        lastLogTime: '@datetime',
-        // avator:function(){ return Mock.Random.dataImage('125x125', this.username.substr(0, 1))}
-      }
-];
-let usersData = Mock.mock({
-      'info|10':userData
-    });
+  {
+    'id|+1': 1,
+    username: '@name',
+    cname: '@cname',
+    email: '@email',
+    lastlogin: '@ip',
+    expire: '1500',
+    token: /[a-zA-Z1-9]{16}/,
+    lastLogTime: '@datetime'
+  }
+]
 
 export default {
   // 获取菜单
@@ -108,15 +116,11 @@ export default {
     ]
   },
 
-  'POST /api/login':{
-    meta:meta,
-    result:Mock.mock({
-      'info|1':userData
-    })
-  },
+  'GET /api/login': response(Mock.mock({
+    'info|1': userData
+  })),
 
-  'GET /api/users':{
-    meta:meta,
-    result:usersData
-  }
+  'GET /api/users': response(Mock.mock({
+    'info|10': userData
+  }))
 }

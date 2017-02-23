@@ -40,8 +40,8 @@ class Dashboard extends React.Component {
               </Breadcrumb>
               <Layout style={{ padding: '24px 0', background: '#fff' }}>
                 <Content style={{ padding: '0 24px', minHeight: 500 }}>
-                Content
-              </Content>
+                  {this.props.children}
+                </Content>
               </Layout>
             </Content>
             <Footer style={{ textAlign: 'center' }}>

@@ -1,4 +1,4 @@
-import React,{ PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { Form, Icon, Input, Button, Card } from 'antd';
 import styles from './Login.css';
 
@@ -9,6 +9,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        // throw new Error(values.username)
         console.log('Received values of form: ', values);
       }
     });
@@ -42,7 +43,7 @@ class LoginForm extends React.Component {
 LoginForm.propTypes = {
   form: PropTypes.object,
   loginButtonLoading: PropTypes.bool,
-  onOk: PropTypes.func
-}
+  onOk: PropTypes.func,
+};
 
 export default Form.create()(LoginForm);

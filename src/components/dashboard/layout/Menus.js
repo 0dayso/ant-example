@@ -36,10 +36,10 @@ class Menus extends React.Component {
           </SubMenu>
           <SubMenu key="sub2" title={<span><Icon type="team" /><span className="nav-text">Team</span></span>}>
             <Menu.Item key="4">
-              <Link to="/login" >Team Login </Link>
+              <Link to="/login" >Login</Link>
             </Menu.Item>
             <Menu.Item key="5">
-             Tesma2
+              <Link to="/setup" >Setup</Link>
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="6">

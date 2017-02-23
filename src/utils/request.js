@@ -1,20 +1,21 @@
 import fetch from 'dva/fetch';
-import { message } from 'antd';
+
 function parseJSON(response) {
-  let res = response.json();
-  if(res.meta.error){
-    throw res.meta.error;
-    message.error(res.meta.error);
-  }else{
-    return res.result;
+  return response.json();
+}
+
+function parseErrorMessage({ result }) {
+  const errorno = result.errorno;
+  if (errorno > 0) {
+    throw new Error(result.errmsg);
   }
+  return result.data;
 }
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-
   const error = new Error(response.statusText);
   error.response = response;
   throw error;
@@ -31,6 +32,7 @@ export default function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
+    .then(parseErrorMessage)
     .then(data => ({ data }))
     .catch(err => ({ err }));
 }

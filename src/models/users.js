@@ -1,6 +1,5 @@
-
 export default {
-  namespace: 'sider',
+  namespace: 'users',
   state: {},
   reducers: {},
   effects: {},
